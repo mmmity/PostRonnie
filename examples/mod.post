@@ -1,0 +1,83 @@
+'''
+This program takes two strings of ones of lengths N and M, separated with one '0' and returns a string of length N mod M.
+M is guaranteed to be greater than zero.
+
+It is going to work like this:
+011111111011100        
+011111111000010        Create a "pocket", where we will move characters from the beginning
+000011111011100        Each iteration we move characters from the beginning to pocket until there is only one zero left to separate them
+000011111000010        We then clear the "pocket" and do this again
+000000011011100
+000000011000010
+000000000001110
+000000000001100
+'''
+
+? 22 17                 # If first string is empty, we clear the second one and end
+> 18
+? 19 83
+0 20
+> 18
+
+> 23                    # Move right while carriage points to '1'
+? 22 25
+
+> 26
+> 27                    # Move right while carriage points to '1' again
+? 26 29
+
+1 30
+< 31
+0 32                    # Set a '1' after second string and clear all before it to create a "pocket"
+< 33
+? 31 35
+
+< 36                    # Move to the beginning of first string
+? 35 37
+> 39
+
+? 53 41                 # If first string is empty at current stage, we must remove last '1' from second string and end
+
+> 42
+? 44 41                 # Move to the second string
+
+> 45
+? 44 47                 # Move to the end of it
+
+< 48                    # Remove last '1' and move to the beginning of second string
+0 49
+< 50
+? 49 51
+> 83
+
+0 54                    # Set '0' to the beginning of the first string
+> 55
+? 54 56
+> 57
+? 59 56                 # Move to the border of the "pocket"
+
+< 60
+< 61
+? 63 74                 # If only one '0' separates two strings, we must empty the "pocket" and proceed to the beginning of loop
+
+> 64
+> 65
+? 64 66
+< 67
+< 68
+0 69
+< 70
+? 68 71                 # Now the "pocket" is empty, and carriage is just after the end of first string
+
+0 35                    # Returning to the beginning of the outer loop
+
+> 75
+1 76                    # Add previously deleted '1' to the "pocket"
+< 77
+? 78 76
+< 79
+? 78 81                 # After this loop we are just before the beginning of first string
+
+0 37                    # Returning to the beginning of the inner loop
+
+END

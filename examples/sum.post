@@ -1,0 +1,27 @@
+'''
+This program gets two strings of ones, of lengths N and M, separated by one zero, as input, and returns string of ones of length N + M
+Carriage points at the start of the first string
+'''
+
+? 9 7              # if first string is empty, move carriage to start of the second
+> end
+
+> 10
+? 9 12             # move right while carriage points to '1'
+> 13               # now carriage points at the start of second number
+
+? 14 20            # this loop shifts second string left by one
+0 15               # at the start of this loop carriage points to the beginning of unshifted part
+< 16               # sets beginning to '0', sets the one on the left to '1'
+1 17
+> 18               
+> 13
+
+< 21               # 11100 <- now carriage points here. We want to move it twice to left
+< 22
+
+< 24
+? 23 26            # move left while carriage points to '1'
+
+> 27
+END
