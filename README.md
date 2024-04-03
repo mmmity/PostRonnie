@@ -4,8 +4,8 @@ Post-Turing machine interpreter
 For now, example programs are stored in the folder "examples"
 
 ## Syntax
-`# comment` - a one-line comment
-`''' multiline\n comment` - a multi-line comment
+`# comment` - a one-line comment \
+`''' multiline\n comment'''` - a multi-line comment
 
 Commands:
 - `> N` - moves carriage right and jumps to line number N
