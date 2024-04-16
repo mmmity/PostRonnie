@@ -7,7 +7,7 @@ BEGIN
 > 27
 
 > 10
-? 9 12             # move right while carriage points to '1'
+? 9 11             # move right while carriage points to '1'
 > 13               # now carriage points at the start of second number
 
 ? 14 20            # this loop shifts second string left by one
@@ -18,7 +18,7 @@ BEGIN
 > 13
 
 < 21               # 11100 <- now carriage points here. We want to move it twice to left
-< 22
+< 23
 
 < 24
 ? 23 26            # move left while carriage points to '1'

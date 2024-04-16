@@ -5,7 +5,7 @@ BEGIN
 ? 7 44         # if no input is given, just do nothing
 
 > 8
-? 7 10          # moving right while carriage points at '1'
+? 7 23          # moving right while carriage points at '1'
 
 '''
 I want program to work like this:
@@ -33,7 +33,7 @@ Strings are always separated by exactly one zero
 1 35
 
 < 36
-? 36 38         # moving left while carriage points at '1'
+? 35 38         # moving left while carriage points at '1'
 
 0 23            # just want to jump to start of this big loop, we know that now carriage points at zero
 

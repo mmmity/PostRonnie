@@ -1,4 +1,4 @@
-'''
+'''   DOESNT WORK FOR NOW, SRY FOR THE INCONVENIENCE
 This program takes two strings of ones of lengths N and M, separated with one '0' and returns a string of length N mod M.
 M is guaranteed to be greater than zero.
 
@@ -67,7 +67,7 @@ BEGIN
 < 68
 0 69
 < 70
-? 68 71                 # Now the "pocket" is empty, and carriage is just after the end of first string
+? 68 72                 # Now the "pocket" is empty, and carriage is just after the end of first string
 
 0 35                    # Returning to the beginning of the outer loop
 
