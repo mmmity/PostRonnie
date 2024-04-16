@@ -35,8 +35,11 @@ class DLList:
         def __prev__(self) -> DLList.Iterator:
             return DLList.Iterator(self.node.prv)
     
-        def value(self):
+        def get_value(self):
             return self.node.value
+        
+        def set_value(self, value):
+            self.node.value = value
 
 
     def end(self) -> Iterator:
