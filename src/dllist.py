@@ -36,6 +36,7 @@ class DLList:
             return DLList.Iterator(self.node.prv)
     
         def get_value(self):
+            # print(self, self.node)
             return self.node.value
         
         def set_value(self, value):
@@ -52,11 +53,18 @@ class DLList:
         self.fake_node = DLList.Node(None, None, None)
         self.fake_node.nxt = self.fake_node
         self.fake_node.prv = self.fake_node
+        self.sz = 0
     
     def insert(self, iter: Iterator, value):
         new_node: DLList.Node = DLList.Node(value, prev(iter).node, iter.node)
         prev(iter).node.nxt = new_node
         iter.node.prv = new_node
+        self.sz += 1
+    
+    def erase(self, iter: Iterator):
+        prev(iter).node.nxt = next(iter).node
+        next(iter).node.prv = prev(iter).node
+        self.sz -= 1
     
     def push_back(self, value):
         self.insert(self.end(), value)
@@ -64,9 +72,21 @@ class DLList:
     def push_front(self, value):
         self.insert(self.begin(), value)
 
+    def pop_back(self):
+        self.erase(prev(self.end()))
+    
+    def pop_front(self):
+        self.erase(self.begin())
+
     def front(self):
         return self.begin().get_value()
     
     def back(self):
         return prev(self.end()).get_value()
+    
+    def __len__(self) -> int:
+        return self.sz
+    
+    def empty(self) -> bool:
+        return len(self) == 0
 
