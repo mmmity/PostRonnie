@@ -25,3 +25,12 @@ Carriage points at the start of the first string
 
 > 27
 END
+
+'''
+Example:
+0C110110 - beginning
+0110C110 - after line 11
+01110C10 - after first iteration of loop 13-18
+01111C00 - after second iteration of that loop
+then move left
+'''

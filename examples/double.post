@@ -42,3 +42,18 @@ Strings are always separated by exactly one zero
 > 44            # but we want carriage to point at the first one, so we move it right two times
 
 END
+
+
+'''
+Example: (Element right after C is where carriage points to)
+0C11000 - at the beginning
+011C000 - after lines 5-8
+0101C00 - after lines 23-31
+0101C10 - after line 33
+01C0110 - after line 36
+then we jump to line 23 and again:
+00111C0 - after lines 23-31
+00111C1 - after line 33
+0C01111 - we jump to line 23 again
+It moves carriage left, sees that there are no more ones left, and then moves it right two times
+'''

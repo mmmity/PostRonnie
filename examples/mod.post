@@ -81,3 +81,13 @@ It is going to work like this:
 0 37                    # Returning to the beginning of the inner loop
 
 END
+
+'''
+Example:
+0C111011000 - at the beginning
+0111000C100 - we created a pocket to put ones from first number to
+0001011C100 - put first part of ones to the pocket
+0001000C100 - clear the pocket
+0000001C100 - put last one into the pocket
+000000C1000 - clean up the helper '1'
+'''
