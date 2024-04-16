@@ -64,9 +64,9 @@ class DLList:
     def push_front(self, value):
         self.insert(self.begin(), value)
 
-    def is_begin(self, iter: Iterator):
-        return iter == self.begin()
-
-    def is_end(self, iter: Iterator):
-        return iter == self.end()
+    def front(self):
+        return self.begin().get_value()
+    
+    def back(self):
+        return prev(self.end()).get_value()
 
