@@ -22,7 +22,7 @@ class LineParser:
             raise ParseError(f'Failed to parse line {line_number}: line is empty')
         
         if vals[0] not in ['>', '<', '1', '0', '?']:
-            raise ParseError(f'Failed to parse line {line_number}: unknown command')
+            raise ParseError(f'Failed to parse line {line_number}: unknown command {vals[0]}')
 
         argnum: int = 3 if vals[0] == '?' else 2
         if len(vals) < argnum:
