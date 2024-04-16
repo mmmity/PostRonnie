@@ -1,7 +1,7 @@
 '''
 This program gets a string of ones of length N as input, and outputs the string of ones of length 2 * N
 '''
-
+BEGIN
 ? 7 44         # if no input is given, just do nothing
 
 > 8

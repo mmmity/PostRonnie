@@ -12,7 +12,7 @@ It is going to work like this:
 000000000001110
 000000000001100
 '''
-
+BEGIN
 ? 22 17                 # If first string is empty, we clear the second one and end
 > 18
 ? 19 83

@@ -2,9 +2,9 @@
 This program gets two strings of ones, of lengths N and M, separated by one zero, as input, and returns string of ones of length N + M
 Carriage points at the start of the first string
 '''
-
+BEGIN
 ? 9 7              # if first string is empty, move carriage to start of the second
-> end
+> 27
 
 > 10
 ? 9 12             # move right while carriage points to '1'
