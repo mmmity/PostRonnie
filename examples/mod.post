@@ -1,4 +1,4 @@
-'''   DOESNT WORK FOR NOW, SRY FOR THE INCONVENIENCE
+'''
 This program takes two strings of ones of lengths N and M, separated with one '0' and returns a string of length N mod M.
 M is guaranteed to be greater than zero.
 
@@ -15,7 +15,7 @@ It is going to work like this:
 BEGIN
 ? 22 17                 # If first string is empty, we clear the second one and end
 > 18
-? 19 83
+? 19 97
 0 20
 > 18
 
@@ -48,38 +48,52 @@ BEGIN
 0 49
 < 50
 ? 49 51
-> 83
+> 87
 
 0 54                    # Set '0' to the beginning of the first string
 > 55
-? 54 56
+? 56 89                 # If first string became empty, we just want to move to the beginning of second one and end the program
 > 57
-? 59 56                 # Move to the border of the "pocket"
+? 56 58
+> 59
+? 61 58                 # Move to the border of the "pocket"
 
-< 60
-< 61
-? 63 74                 # If only one '0' separates two strings, we must empty the "pocket" and proceed to the beginning of loop
+< 62
+< 63
+? 65 76                 # If only one '0' separates two strings, we must empty the "pocket" and proceed to the beginning of loop
 
-> 64
-> 65
-? 64 66
-< 67
-< 68
-0 69
+> 66
+> 67
+? 66 68
+< 69
 < 70
-? 68 72                 # Now the "pocket" is empty, and carriage is just after the end of first string
+0 71
+< 72
+? 70 74                 # Now the "pocket" is empty, and carriage is just after the end of first string
 
 0 35                    # Returning to the beginning of the outer loop
 
-> 75
-1 76                    # Add previously deleted '1' to the "pocket"
-< 77
-? 78 76
+> 77
+1 78                    # Add previously deleted '1' to the "pocket"
 < 79
-? 78 81                 # After this loop we are just before the beginning of first string
+< 80
+? 65 81
+< 82
+? 83 81                 
+< 84
+? 83 87
+                        # After this loop we are just before the beginning of first string
 
 0 37                    # Returning to the beginning of the inner loop
 
+> 90
+> 91
+? 92 95
+0 93
+> 94                    # If second string is too close to first one, N is divisible by M, so we must empty the second string
+? 92 97                
+> 96
+? 97 95
 END
 
 '''
