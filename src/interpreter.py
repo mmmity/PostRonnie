@@ -3,7 +3,6 @@ Implementation of basic interpreter. Class Interpreter is used to interpret code
 '''
 from __future__ import annotations
 from typing import List
-import time
 
 from dllist import DLList, nxt, prv
 from line_parser import LineParser, ParseResults
@@ -101,9 +100,11 @@ class Interpreter:
         out_arr = []
         iterator = self.data.begin()
         while iterator != self.data.end():
+            strval = str(int(iterator.get_value()))
             if iterator == self.carriage:
-                out_arr.append('C')
-            out_arr.append(str(int(iterator.get_value())))
+                out_arr.append('\033[94m\033[1m' + strval + '\033[0m')
+            else:
+                out_arr.append(strval)
             iterator = nxt(iterator)
 
         return ''.join(out_arr)
@@ -121,16 +122,3 @@ class Interpreter:
             # print(program)
 
         return Interpreter(inp, program)
-
-
-inter: Interpreter = Interpreter.load_from_files('input', 'examples/mod.post')
-
-while True:
-    try:
-        inter.interpret_current_line()
-        print(inter.debug())
-        time.sleep(0.5)
-    except EndOfProgram:
-        break
-
-print(inter.get_results())
