@@ -46,7 +46,6 @@ class Interpreter:
         '''
         Interprets current line, changes data, moves carriage and line accordingly
         '''
-        print(self.current_index)
         if self.program[self.current_index] == 'END':
             raise EndOfProgram()
 
@@ -107,7 +106,7 @@ class Interpreter:
                 out_arr.append(strval)
             iterator = nxt(iterator)
 
-        return ''.join(out_arr)
+        return ''.join(out_arr) + f' on line {self.current_index + 1}'
 
     @staticmethod
     def load_from_files(input_file: str, program_file: str) -> Interpreter:
