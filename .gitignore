@@ -1,1 +1,6 @@
 __pycache__
+.venv
+input
+output
+input_numbers
+output_numbers
