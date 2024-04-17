@@ -4,8 +4,8 @@ Implementation of basic interpreter. Class Interpreter is used to interpret code
 from __future__ import annotations
 from typing import List
 
-from dllist import DLList, nxt, prv
-from line_parser import LineParser, ParseResults
+from .dllist import DLList, nxt, prv
+from .line_parser import LineParser, ParseResults
 
 
 class EndOfProgram(Exception):

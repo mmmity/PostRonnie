@@ -1,12 +1,9 @@
-import sys
-sys.path.append('./src')
-
-from interpreter import Interpreter, EndOfProgram
-from tape_mapper import TapeMapper
-
 import argparse
 import textwrap
 import time
+
+from src.interpreter import Interpreter, EndOfProgram
+from src.tape_mapper import TapeMapper
 
 def main():
     parser = argparse.ArgumentParser(
@@ -43,14 +40,14 @@ def main():
             except FileNotFoundError:
                 print('No such file or directory')
                 return
-            
+
             while True:
                 try:
                     interpreter.interpret_current_line()
                 except EndOfProgram:
                     results = interpreter.get_results()
                     break
-            
+
             if args.output_file is None:
                 print(results)
             else:
@@ -75,7 +72,7 @@ def main():
                 except EndOfProgram:
                     results = interpreter.get_results()
                     break
-        
+
         case 'tape-to-numbers':
             results = TapeMapper.tape_to_numbers(input_str)
 
@@ -84,13 +81,13 @@ def main():
             else:
                 with open(args.output_file, 'w') as output_file:
                     output_file.write(' '.join(map(str, results)))
-        
+
         case 'numbers-to-tape':
             try:
                 numbers = list(map(int, input_str.split()))
             except ValueError:
                 print('Must provide numbers')
-            
+
             results = TapeMapper.numbers_to_tape(*numbers)
 
             if args.output_file is None:
