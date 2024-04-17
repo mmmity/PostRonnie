@@ -1,92 +1,147 @@
+'''
+Implementation of double-linked list for interpreter
+'''
 from __future__ import annotations
 
 
+def nxt(iterator):
+    '''
+    Returns iterator to the next node
+    '''
+    return iterator.__nxt__()
 
-
-def next(iter):
-    return iter.__next__()
-
-def prev(iter):
-    return iter.__prev__()
+def prv(iterator):
+    '''
+    Returns iterator to the previous node
+    '''
+    return iterator.__prv__()
 
 
 class DLList:
-
+    '''
+    Implementation of double-linked list
+    '''
     class Node:
-        def __init__(self, value, prv: DLList.Node, nxt: DLList.Node):
+        '''
+        A node of double-linked list
+        '''
+        def __init__(self, value, prv_node: DLList.Node, nxt_node: DLList.Node):
             self.value = value
-            self.nxt = nxt
-            self.prv = prv
+            self.nxt = nxt_node
+            self.prv = prv_node
 
 
     class Iterator:
+        '''
+        Bidirectional iterator for walking over list
+        '''
         def __init__(self, node: DLList.Node):
             self.node: DLList.Node = node
-        
+
         def __eq__(self, other: DLList.Iterator) -> bool:
             return self.node is other.node
-        
+
         def __ne__(self, other: DLList.Iterator) -> bool:
             return not self == other
 
-        def __next__(self) -> DLList.Iterator:
+        def __nxt__(self) -> DLList.Iterator:
             return DLList.Iterator(self.node.nxt)
-        
-        def __prev__(self) -> DLList.Iterator:
+
+        def __prv__(self) -> DLList.Iterator:
             return DLList.Iterator(self.node.prv)
-    
+
         def get_value(self):
-            # print(self, self.node)
+            '''
+            Returns node value
+            '''
             return self.node.value
-        
+
         def set_value(self, value):
+            '''
+            Sets node value
+            '''
             self.node.value = value
 
 
     def end(self) -> Iterator:
+        '''
+        Returns iterator to the element after the last
+        '''
         return self.Iterator(self.fake_node)
 
     def begin(self) -> Iterator:
-        return next(self.end())
+        '''
+        Returns iterator to the first element
+        '''
+        return nxt(self.end())
 
     def __init__(self):
+        '''
+        Initializes fake_node with dummy values
+        '''
         self.fake_node = DLList.Node(None, None, None)
         self.fake_node.nxt = self.fake_node
         self.fake_node.prv = self.fake_node
         self.sz = 0
-    
-    def insert(self, iter: Iterator, value):
-        new_node: DLList.Node = DLList.Node(value, prev(iter).node, iter.node)
-        prev(iter).node.nxt = new_node
-        iter.node.prv = new_node
+
+    def insert(self, iterator: Iterator, value):
+        '''
+        Inserts value just before the iter
+        '''
+        new_node: DLList.Node = DLList.Node(value, prv(iterator).node, iterator.node)
+        prv(iterator).node.nxt = new_node
+        iterator.node.prv = new_node
         self.sz += 1
-    
-    def erase(self, iter: Iterator):
-        prev(iter).node.nxt = next(iter).node
-        next(iter).node.prv = prev(iter).node
+
+    def erase(self, iterator: Iterator):
+        '''
+        Erases value on iter
+        '''
+        prv(iterator).node.nxt = nxt(iterator).node
+        nxt(iterator).node.prv = prv(iterator).node
         self.sz -= 1
-    
+
     def push_back(self, value):
+        '''
+        Adds value to the back of list
+        '''
         self.insert(self.end(), value)
 
     def push_front(self, value):
+        '''
+        Adds value to the front of list
+        '''
         self.insert(self.begin(), value)
 
     def pop_back(self):
-        self.erase(prev(self.end()))
-    
+        '''
+        Removes value from back of list
+        '''
+        self.erase(prv(self.end()))
+
     def pop_front(self):
+        '''
+        Removes value from front of list
+        '''
         self.erase(self.begin())
 
     def front(self):
+        '''
+        Returns value of first element
+        '''
         return self.begin().get_value()
-    
+
     def back(self):
-        return prev(self.end()).get_value()
-    
+        '''
+        Returns value of last element
+        '''
+        return prv(self.end()).get_value()
+
     def __len__(self) -> int:
         return self.sz
-    
-    def empty(self) -> bool:
-        return len(self) == 0
 
+    def empty(self) -> bool:
+        '''
+        Checks if list is empty
+        '''
+        return len(self) == 0

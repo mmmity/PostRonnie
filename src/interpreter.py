@@ -1,22 +1,30 @@
+'''
+Implementation of basic interpreter. Class Interpreter is used to interpret code
+'''
 from __future__ import annotations
-from dllist import DLList, next, prev
-from line_parser import LineParser, ParseResults
 from typing import List
 import time
 
-
-class SyntaxError(Exception):
-    pass
+from dllist import DLList, nxt, prv
+from line_parser import LineParser, ParseResults
 
 
 class EndOfProgram(Exception):
-    pass
+    '''
+    Is thrown when program reaches the end
+    '''
 
 
 class Interpreter:
-    def __init__(self, input: str, program: List[str]):
+    '''
+    Implementation of interpreter
+    '''
+    def __init__(self, input_str: str, program: List[str]):
+        '''
+        Initializes dllist of bools as current data and program as list of commands
+        '''
         self.data = DLList()
-        for c in input:
+        for c in input_str:
             if c == '1':
                 self.data.push_back(True)
             elif c == '0':
@@ -30,72 +38,88 @@ class Interpreter:
 
         try:
             self.current_index = program.index('BEGIN')
-        except ValueError:
-            raise SyntaxError('Failed to parse the program: no BEGIN keyword')
-        
+        except ValueError as e:
+            raise SyntaxError('Failed to parse the program: no BEGIN keyword') from e
+
         self.current_index += 1
-    
+
     def interpret_current_line(self):
+        '''
+        Interprets current line, changes data, moves carriage and line accordingly
+        '''
         print(self.current_index)
         if self.program[self.current_index] == 'END':
             raise EndOfProgram()
 
         try:
-            results: ParseResults = LineParser.parse(self.program[self.current_index], self.current_index + 1, self.carriage.get_value())
-        except IndexError:
-            raise SyntaxError(f'Failed to parse the program: line {self.current_index + 1} does not exist')
+            results: ParseResults = LineParser.parse(
+                self.program[self.current_index],
+                self.current_index + 1,
+                self.carriage.get_value()
+            )
+        except IndexError as e:
+            raise SyntaxError('Failed to parse the program:' +
+                              f'line {self.current_index + 1} does not exist') from e
 
         self.carriage.set_value(results.newval)
 
         if results.delta == -1:
             if self.carriage == self.data.begin():
                 self.data.push_front(False)
-            self.carriage = prev(self.carriage)
+            self.carriage = prv(self.carriage)
         elif results.delta == 1:
-            if self.carriage == prev(self.data.end()):
+            if self.carriage == prv(self.data.end()):
                 self.data.push_back(False)
-            self.carriage = next(self.carriage)
-        
-        self.current_index = results.newline - 1
-    
-    def get_results(self) -> str:
+            self.carriage = nxt(self.carriage)
 
-        while not self.data.empty() and self.data.back() == False:
+        self.current_index = results.newline - 1
+
+    def get_results(self) -> str:
+        '''
+        Returns pretty formatted string as result
+        '''
+        while not self.data.empty() and not self.data.back():
             self.data.pop_back()
         self.data.push_back(False)
 
-        while not self.data.empty() and self.data.front() == False:
+        while not self.data.empty() and not self.data.front():
             self.data.pop_front()
         self.data.push_front(False)
 
         out_arr = []
-        iter = self.data.begin()
-        while iter != self.data.end():
-            out_arr.append(str(int(iter.get_value())))
-            iter = next(iter)
+        iterator = self.data.begin()
+        while iterator != self.data.end():
+            out_arr.append(str(int(iterator.get_value())))
+            iterator = nxt(iterator)
 
         return ''.join(out_arr)
 
     def debug(self) -> str:
-
+        '''
+        Prints formatted current data
+        '''
         out_arr = []
-        iter = self.data.begin()
-        while iter != self.data.end():
-            if iter == self.carriage:
+        iterator = self.data.begin()
+        while iterator != self.data.end():
+            if iterator == self.carriage:
                 out_arr.append('C')
-            out_arr.append(str(int(iter.get_value())))
-            iter = next(iter)
+            out_arr.append(str(int(iterator.get_value())))
+            iterator = nxt(iterator)
 
         return ''.join(out_arr)
-    
+
+    @staticmethod
     def load_from_files(input_file: str, program_file: str) -> Interpreter:
+        '''
+        Loads input from input_file, program from program_file
+        '''
         with open(input_file, 'r') as f:
             inp = f.read().strip()
-        
+
         with open(program_file, 'r') as f:
             program = f.read().split('\n')
             # print(program)
-        
+
         return Interpreter(inp, program)
 
 
