@@ -1,5 +1,6 @@
 # PostRonnie
 Post-Turing machine interpreter
+![coverage](coverage.svg)
 
 For now, example programs are stored in the folder "examples"
 
@@ -47,3 +48,7 @@ Commands:
 - `0 N` - puts character '0' into current position of carriage and jumps to line number N
 - `? N M` - if carriage points to '1', jumps to line number N, otherwise jumps to line number M
 - `END` - end of program
+
+## Tests
+### Unit tests
+Unit tests are stored in `tests` folder. To run them, use `python -m unittest discover -v` in project root directory.
