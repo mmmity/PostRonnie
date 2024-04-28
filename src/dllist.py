@@ -145,3 +145,19 @@ class DLList:
         Checks if list is empty
         '''
         return len(self) == 0
+
+    def __eq__(self, other: DLList) -> bool:
+        if len(self) != len(other):
+            return False
+        
+        this_iter, other_iter = self.begin(), other.begin()
+        while this_iter != self.end():
+            if this_iter.get_value() != other_iter.get_value():
+                return False
+            this_iter = nxt(this_iter)
+            other_iter = nxt(other_iter)
+        
+        return True
+
+    def __ne__(self, other: DLList) -> bool:
+        return not self == other

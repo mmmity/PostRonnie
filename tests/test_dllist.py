@@ -57,3 +57,15 @@ class TestDLList(unittest.TestCase):
             self.assertFalse(self.list.empty())
             self.list.pop_back()
         self.assertTrue(self.list.empty())
+
+    def test_equality(self):
+        other_list = DLList()
+        for i in range(4):
+            other_list.push_back(i)
+        
+        self.assertFalse(self.list == other_list)
+        other_list.push_back(6)
+        self.assertFalse(self.list == other_list)
+        prv(other_list.end()).set_value(4)
+        self.assertTrue(self.list == other_list)
+        self.assertFalse(self.list != other_list)
