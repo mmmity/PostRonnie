@@ -71,5 +71,3 @@ class LineParser:
                 if current_value:
                     return ParseResults(0, args[0], current_value)
                 return ParseResults(0, args[1], current_value)
-            case _:
-                raise ParseError(f'Failed to parse line {line_number}: unknown command')
