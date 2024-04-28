@@ -55,6 +55,10 @@ class Interpreter:
         '''
         Interprets current line, changes data, moves carriage and line accordingly
         '''
+        if self.current_index >= len(self.program) or self.current_index < 0:
+            raise SyntaxError('Failed to parse the program:' +
+                              f'line {self.current_index + 1} does not exist')
+
         if self.program[self.current_index] == 'END':
             raise EndOfProgram()
     
@@ -62,15 +66,12 @@ class Interpreter:
         if (self.step_count >= self.MAX_STEP_COUNT):
             raise UndefinedError()
 
-        try:
-            results: ParseResults = LineParser.parse(
-                self.program[self.current_index],
-                self.current_index + 1,
-                self.carriage.get_value()
-            )
-        except IndexError as e:
-            raise SyntaxError('Failed to parse the program:' +
-                              f'line {self.current_index + 1} does not exist') from e
+        results: ParseResults = LineParser.parse(
+            self.program[self.current_index],
+            self.current_index + 1,
+            self.carriage.get_value()
+        )
+            
 
         self.carriage.set_value(results.newval)
 
