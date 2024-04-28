@@ -41,7 +41,6 @@ def main():
                 print('No such file or directory')
                 return
 
-            step_count = 0
             while True:
                 try:
                     interpreter.interpret_current_line()
@@ -79,7 +78,7 @@ def main():
                 except UndefinedError:
                     results = 'undefined'
                     break
-            
+
             print(results)
 
         case 'tape-to-numbers':
