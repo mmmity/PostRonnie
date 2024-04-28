@@ -20,7 +20,7 @@ class TapeMapper:
         '''
         try:
             numbers_strings = ['1' * k for k in numbers]
-        except ValueError as e:
+        except (ValueError, TypeError) as e:
             raise ValueError('Numbers must be integers') from e
 
         return '0'.join(numbers_strings)
