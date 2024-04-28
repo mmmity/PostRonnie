@@ -6,7 +6,7 @@ class TestDLList(unittest.TestCase):
         self.list = DLList()
         for i in range(5):
             self.list.push_back(i)
-    
+
     def check_bypass(self, iterable):
         iterator = self.list.begin()
         self.assertEqual(len(iterable), len(self.list))
@@ -53,7 +53,7 @@ class TestDLList(unittest.TestCase):
         self.assertEqual(iterator.get_value(), None)
 
     def test_empty(self):
-        for i in range(5):
+        for _ in range(5):
             self.assertFalse(self.list.empty())
             self.list.pop_back()
         self.assertTrue(self.list.empty())
