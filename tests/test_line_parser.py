@@ -11,25 +11,25 @@ class TestLineParser(unittest.TestCase):
     def test_malformed(self):
         with self.assertRaisesRegex(ParseError, r'.* line is empty'):
             LineParser.parse('', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* unknown command'):
             LineParser.parse('P 1', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* too few .*'):
             LineParser.parse('? 2', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* too few .*'):
             LineParser.parse('>', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* too many .*'):
             LineParser.parse('> 2 3', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* too many .*'):
             LineParser.parse('? 2 3 4 5', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* must be integers'):
             LineParser.parse('? cringe flex', 0, False)
-        
+
         with self.assertRaisesRegex(ParseError, r'.* must be integers'):
             LineParser.parse('> >', 0, False)
 
