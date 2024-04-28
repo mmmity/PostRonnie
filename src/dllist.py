@@ -76,7 +76,7 @@ class DLList:
         '''
         return nxt(self.end())
 
-    def __init__(self, iterable=[]):
+    def __init__(self, iterable: Iterable=[]):
         '''
         Initializes fake_node with dummy values
         If iterable is specified, initializes list with its values
@@ -154,14 +154,14 @@ class DLList:
     def __eq__(self, other: DLList) -> bool:
         if len(self) != len(other):
             return False
-        
+
         this_iter, other_iter = self.begin(), other.begin()
         while this_iter != self.end():
             if this_iter.get_value() != other_iter.get_value():
                 return False
             this_iter = nxt(this_iter)
             other_iter = nxt(other_iter)
-        
+
         return True
 
     def __ne__(self, other: DLList) -> bool:
