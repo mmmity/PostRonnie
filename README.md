@@ -52,3 +52,9 @@ Commands:
 ## Tests
 ### Unit tests
 Unit tests are stored in `tests` folder. To run them, use `python -m unittest discover -v` in project root directory.
+
+### Stress tests
+To run stress tests on `example.post` program, you must create file `example.py` in directory `examples`, which works with integers and must do the same thing as `example.post`. 
+You then run `python stress_tests.py example <number_of_integer_arguments> <number_of_tests>` to test `example.post` on some random tests. If outputs from `example.py` and `example.post` differ, the script will print the test case and exit.
+
+Example: `python stress_tests.py mod 2 1000` will run 1000 random tests checking that `mod.post` and `mod.py` output the same results.
