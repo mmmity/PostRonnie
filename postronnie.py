@@ -41,9 +41,14 @@ def main():
                 print('No such file or directory')
                 return
 
+            step_count = 0
             while True:
                 try:
                     interpreter.interpret_current_line()
+                    step_count += 1
+                    if step_count >= 1000:
+                        results = 'undefined'
+                        break
                 except EndOfProgram:
                     results = interpreter.get_results()
                     break
@@ -69,9 +74,15 @@ def main():
                     print(interpreter.debug())
                     interpreter.interpret_current_line()
                     time.sleep(0.3)
+                    step_count += 1
+                    if step_count >= 1000:
+                        results = 'undefined'
+                        break
                 except EndOfProgram:
                     results = interpreter.get_results()
                     break
+            
+            print(results)
 
         case 'tape-to-numbers':
             results = TapeMapper.tape_to_numbers(input_str)
