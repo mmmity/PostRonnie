@@ -2,7 +2,7 @@ import argparse
 import textwrap
 import time
 
-from src.interpreter import Interpreter, EndOfProgram
+from src.interpreter import Interpreter, EndOfProgram, UndefinedError
 from src.tape_mapper import TapeMapper
 
 def main():
@@ -45,12 +45,11 @@ def main():
             while True:
                 try:
                     interpreter.interpret_current_line()
-                    step_count += 1
-                    if step_count >= 1000:
-                        results = 'undefined'
-                        break
                 except EndOfProgram:
                     results = interpreter.get_results()
+                    break
+                except UndefinedError:
+                    results = 'undefined'
                     break
 
             if args.output_file is None:
@@ -74,12 +73,11 @@ def main():
                     print(interpreter.debug())
                     interpreter.interpret_current_line()
                     time.sleep(0.3)
-                    step_count += 1
-                    if step_count >= 1000:
-                        results = 'undefined'
-                        break
                 except EndOfProgram:
                     results = interpreter.get_results()
+                    break
+                except UndefinedError:
+                    results = 'undefined'
                     break
             
             print(results)

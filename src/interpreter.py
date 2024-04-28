@@ -14,15 +14,24 @@ class EndOfProgram(Exception):
     '''
 
 
+class UndefinedError(Exception):
+    '''
+    Is thrown when program reaches the maximum steps count
+    The return value is considered undefined
+    '''
+
+
 class Interpreter:
     '''
     Implementation of interpreter
     '''
+    MAX_STEP_COUNT = 1000
     def __init__(self, input_str: str, program: List[str]):
         '''
         Initializes dllist of bools as current data and program as list of commands
         '''
         self.data = DLList()
+        self.step_count = 0
         for c in input_str:
             if c == '1':
                 self.data.push_back(True)
@@ -48,6 +57,10 @@ class Interpreter:
         '''
         if self.program[self.current_index] == 'END':
             raise EndOfProgram()
+    
+        self.step_count += 1
+        if (self.step_count >= self.MAX_STEP_COUNT):
+            raise UndefinedError()
 
         try:
             results: ParseResults = LineParser.parse(
