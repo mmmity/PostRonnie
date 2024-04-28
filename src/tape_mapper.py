@@ -38,4 +38,6 @@ class TapeMapper:
         splitted = tape.split('0')
 
         out = [len(s) for s in splitted if len(s) != 0]
+        if len(out) == 0:
+            out.append(0)
         return out
