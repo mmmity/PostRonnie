@@ -2,6 +2,7 @@
 Implementation of double-linked list for interpreter
 '''
 from __future__ import annotations
+from typing import Iterable
 
 
 def nxt(iterator):
@@ -75,14 +76,18 @@ class DLList:
         '''
         return nxt(self.end())
 
-    def __init__(self):
+    def __init__(self, iterable=[]):
         '''
         Initializes fake_node with dummy values
+        If iterable is specified, initializes list with its values
         '''
         self.fake_node = DLList.Node(None, None, None)
         self.fake_node.nxt = self.fake_node
         self.fake_node.prv = self.fake_node
         self.sz = 0
+
+        for el in iterable:
+            self.push_back(el)
 
     def insert(self, iterator: Iterator, value):
         '''
