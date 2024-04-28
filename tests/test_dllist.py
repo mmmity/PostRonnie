@@ -15,6 +15,10 @@ class TestDLList(unittest.TestCase):
             iterator = nxt(iterator)
         self.assertEqual(iterator, self.list.end())
 
+    def test_constructor(self):
+        self.list = DLList([1, 2, 3, 4])
+        self.check_bypass([1, 2, 3, 4])
+
     def test_iterator_bypass(self):
         self.check_bypass([0, 1, 2, 3, 4])
 
