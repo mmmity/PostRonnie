@@ -58,3 +58,6 @@ To run stress tests on `example.post` program, you must create file `example.py`
 You then run `python stress_tests.py example <number_of_integer_arguments> <number_of_tests>` to test `example.post` on some random tests. If outputs from `example.py` and `example.post` differ, the script will print the test case and exit.
 
 Example: `python stress_tests.py mod 2 1000` will run 1000 random tests checking that `mod.post` and `mod.py` output the same results.
+
+
+Also you can just run `run_integral_tests.py`, it runs random tests for each example automatically.
