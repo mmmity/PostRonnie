@@ -88,7 +88,7 @@ def main():
         except FileNotFoundError:
             print('No such program. Aborting')
             clean_up(suffix)
-            return
+            exit(1)
         except ValueError:
             clean_up(suffix)
             continue
@@ -96,14 +96,14 @@ def main():
             print('Error in post machine. Aborting')
             print('Test case is: ' + ' '.join(map(str, test_case)))
             clean_up(suffix)
-            return
+            exit(1)
 
         try:
             if not compare_test_case(suffix):
                 print('Outputs do not match')
                 print('Test case is: ' + ' '.join(map(str, test_case)))
                 clean_up(suffix)
-                return
+                exit(1)
         except Exception as e:
             clean_up(suffix)
             print('Got exception:', e)
